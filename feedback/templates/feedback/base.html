@@ -1,0 +1,28 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<link rel="icon" type="image/png"  href="{% static 'feedback/logo.png' %}">
+
+{% if user.is_authenticated %}
+  <div class="alert alert-success text-center">
+
+      <h2>Logged in as {{ user.username }} </h2>
+
+      <form class="form-group" action="{% url 'logoutuser' %}" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-danger" value="Log Out">
+      </form>
+      </div>
+  {% else %}
+
+  <div class="alert alert-primary text-right">
+    <a  href="{% url 'createuser' %}">Create User</a>
+    <a  href="{% url 'loginuser' %}">Log In</a>
+  </div>
+{% endif %}
+
+
+
+
+{% block content %}{% endblock %}
